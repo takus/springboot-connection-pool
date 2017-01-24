@@ -1,0 +1,39 @@
+app:
+  readerEnabled: true
+  writerEnabled: true
+
+spring:
+  application:
+    name: springboot-cp
+  profiles:
+    active: default
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    tomcat:
+      initialSize: 2
+      minIdle: 2
+      maxIdle: 2
+      maxActive: 2
+      testOnBorrow: true
+      testWhileIdle: true
+      validationQuery: select 1
+      validationQueryTimeout: 3
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 2
+      connectionTimeout: 3
+      connectionTestQuery: select 1
+  jpa:
+    hibernate:
+      show_sql: false
+      format_sql: false
+      ddl-auto: create-drop
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: debug

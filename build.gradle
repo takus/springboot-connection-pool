@@ -1,0 +1,44 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'springboot-cp'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+apply plugin: 'application'
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main { compileClasspath += configurations.provided }
+}
+
+dependencies {
+	provided("org.projectlombok:lombok:1.16.8")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+	compile("com.zaxxer:HikariCP:2.5.1")
+	runtime("mysql:mysql-connector-java:5.1.38")
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}

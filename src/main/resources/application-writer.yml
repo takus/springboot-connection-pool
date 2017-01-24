@@ -1,0 +1,10 @@
+app:
+  readerEnabled: false
+  writerEnabled: true
+
+spring:
+  datasource:
+    tomcat:
+      validationQuery: select case when @@read_only + @@innodb_read_only = 0 then 1 else (select table_name from information_schema.tables) end as c
+    hikari:
+      connectionTestQuery: select case when @@read_only + @@innodb_read_only = 0 then 1 else (select table_name from information_schema.tables) end as c
